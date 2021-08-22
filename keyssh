@@ -1,5 +1,12 @@
 #!/bin/bash
+####################################################
+#
+#  Modificaciones Al Codigo: Illuminati Team
+#  https://t.me/admmanagerfree
+#
+####################################################
 cat /dev/null > ~/.bash_history && history -c
+barra="\033[0m\e[34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 x="ok"
 IP=$(wget -qO- ipv4.icanhazip.com)
 while true $x != "ok"
@@ -9,38 +16,71 @@ if [ ! -e /home/keyssh ]; then
     mkdir /home/keyssh
 fi
 key_tmp="$RANDOM:$RANDOM"
+a="$RANDOM"
+b="$RANDOM"
+echo "$a" > /tmp/a
+echo "$b" > /tmp/b
+pasta1=$(cat /tmp/a)
+pasta2=$(cat /tmp/b)
+signus=":"
 
 mine_port () {
-PT=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
-for porta in `echo -e "$PT" | cut -d: -f2 | cut -d' ' -f1 | uniq`; do
-    svcs=$(echo -e "$PT" | grep -w "$porta" | awk '{print $1}' | uniq)
-    echo -e "\033[1;32m Servico \033[1;31m$svcs \033[1;32mPorta \033[1;37m$porta"
+unset portas
+portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
+i=0
+while read port; do
+var1=$(echo $port | awk '{print $1}') && var2=$(echo $port | awk '{print $9}' | awk -F ":" '{print $2}')
+[[ "$(echo -e ${portas[@]}|grep "$var1 $var2")" ]] || {
+    portas[$i]="$var1 $var2"
+    let i++
+    }
+done <<< "$portas_var"
+for((i=0; i<=${#portas[@]}; i++)); do
+servico="$(echo ${portas[$i]}|cut -d' ' -f1)"
+porta="$(echo ${portas[$i]}|cut -d' ' -f2)"
+[[ -z $servico ]] && break
+texto="\033[1;31m ${servico}: \033[1;32m${porta}"
+     while [[ ${#texto} -lt 35 ]]; do
+        texto=$texto" "
+     done
+echo -ne "${texto}"
+let i++
+servico="$(echo ${portas[$i]}|cut -d' ' -f1)"
+porta="$(echo ${portas[$i]}|cut -d' ' -f2)"
+[[ -z $servico ]] && {
+   echo -e " "
+   break
+   }
+texto="\033[1;31m ${servico}: \033[1;32m${porta}"
+     while [[ ${#texto} -lt 35 ]]; do
+        texto=$texto" "
+     done
+echo -ne "${texto}"
+let i++
+servico="$(echo ${portas[$i]}|cut -d' ' -f1)"
+porta="$(echo ${portas[$i]}|cut -d' ' -f2)"
+[[ -z $servico ]] && {
+   echo -e " "
+   break
+   }
+texto="\033[1;31m ${servico}: \033[1;32m${porta}"
+     while [[ ${#texto} -lt 35 ]]; do
+        texto=$texto" "
+     done
+echo -e "${texto}"
 done
 }
 
-menu2 () {
-# MEMÓRIA RAM
-_ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
-_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
-# PROCESSADOR
-_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
-_core=$(printf '%-1s' "$(grep -c cpu[0-9] /proc/stat)")
-echo -e " \033[1;32mMEMÓRIA RAM      PROCESSADOR "
-echo -e " \033[1;31mTotal:\033[1;37m$_ram \033[1;31mNucleos: \033[1;37m$_core\033[0m"
-echo -e " \033[1;31mEm uso: \033[1;37m$_usor \033[1;31mEm uso: \033[1;37m$_usop\033[0m"
-}
-
 fun_gerkey () {
-apt-get install apache2 -y  > /dev/null 2>&1
-sed -i "s/Listen 81/Listen 80/g" /etc/apache2/ports.conf
-service apache2 restart
-echo -ne "\033[1;36m Infome o nome do Cliente:\033[1;37m "; read client
+echo ""
+echo -ne "\033[1;36mInfome o nome do Cliente:\033[1;37m "; read client
 if [[ -z $client ]]; then
    echo -e "\033[1;31m Nome invalido ou vazio\033[0m"
    sleep 2
    exit 0
 fi
-echo -ne "\033[1;36m Quantos minutos essa key deve durar\033[1;33m
+echo ""
+echo -ne "\033[1;36mQuantos minutos essa key deve durar\033[1;33m
 (\033[1;31mEX: 20m m=Minutos, h=Horas, d=Dias\033[1;33m)\033[1;37m: "; read _temp
 if [[ -z $_temp ]]; then
    echo -e "\033[1;31m Tempo invalido ou vazio\033[0m"
@@ -50,49 +90,56 @@ fi
 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 [[ ! -e /var/www/index.html ]] && touch /var/www/index.html > /dev/null 2>&1
-mkdir /var/www/$key_tmp/
+mkdir /var/www/$pasta1
+mkdir /var/www/$pasta1/$pasta2
 touch /home/keyssh/$client
-cp /home/list /var/www/$key_tmp/
-cp /home/versao /var/www/$key_tmp/
-# cp /home/painel15.tar /var/www/$key_tmp/
-touch /var/www/$key_tmp/index.html > /dev/null 2>&1
+cp /home/list /var/www/$pasta1/$pasta2/list
+## cp -a /home/_script_$/. /var/www/$pasta1
+## chmod 777 /var/www/$pasta1/crz/*
 else
-[[ ! -e /var/www/html/Index.php ]] && touch /var/www/html/index.php > /dev/null 2>&1
-mkdir /var/www/html/$key_tmp/
+[[ ! -e /var/www/html/index.php ]] && touch /var/www/html/index.php > /dev/null 2>&1
+mkdir /var/www/html/$pasta1
+mkdir /var/www/html/$pasta1/$pasta2
 touch /home/keyssh/$client
-cp /home/list /var/www/html/$key_tmp/
-cp /home/versao /var/www/html/$key_tmp/
-# cp /home/painel15.tar /var/www/html/$key_tmp/
-touch /var/www/html/$key_tmp/index.html > /dev/null 2>&1
+cp /home/list /var/www/html/$pasta1/$pasta2/list
+## cp -a /home/_script_$/. /var/www/html/$pasta1
+## chmod 777 /var/www/html/$pasta1/crz/*
 fi
 clear
-echo -e "\033[0;34m ========================="
-echo -e "\033[1;33m SCRIPT SSHPLUS MANAGER !    \033[0m"
-echo -e "\033[0;34m ========================="
-echo -e ""
-echo -e "\033[1;37m apt-get update -y; apt-get upgrade -y; wget $IP/Plus; chmod 777 Plus; ./Plus"
-echo -e ""
-echo -e "\033[1;32m KEY:\033[1;37m $key_tmp\033[0m"
-echo -e ""
-echo -e "\033[0;34m ========================="
-echo -e "\033[1;33m Obrigado Pela Sua Contribuicao! 👍By @crazy_vpn ✌️😎 \033[0m"
+echo -e "\033[0;34m============================"
+echo -e "\033[1;33m⇱ SCRIPT SSHPLUS MANAGER ⇲    \033[0m"
+echo -e "\033[0;34m============================"
 echo ""
-echo -e "\033[1;32m Usuario: \033[1;37m $client\033[0m"
-echo -e "\033[1;32m Validade da key:\033[1;37m $_temp\033[0m"
+echo -e "\033[1;37mwget $IP/scripts/Plus; chmod 777 Plus; ./Plus"
 echo ""
-echo -e "\033[1;37m$(cat /home/versao) \033[0m"
-echo -e ""
+echo -e "\033[1;32mKEY: \033[1;37m$pasta1$signus$pasta2\033[0m"
+echo ""
+#echo -e "\033[0;34m============================"
+#echo -e "\033[1;33m? TUTORIAL DE INSTALAÇÃO !    \033[0m"
+echo -e "\033[0;34m============================"
+echo -e "\033[1;33mObrigado Pela Sua Contribuicao! 👍
+DEV: CRAZY ✌️😎 \033[0m"
+echo ""
+echo -e "\033[1;32mUsuario: \033[1;37m $client\033[0m"
+echo -e "\033[1;32mValidade: \033[1;37m$_temp\033[0m"
+echo -e "\033[1;32mVersao: \033[1;37m  $(cat /var/www/html/_script_$/versao)\033[0m"
 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 echo "#!/bin/bash
+#NAME: $client
+#KEY: $pasta1$signus$pasta2
+#VALIDADE: $_temp
 sleep $_temp
-rm -rf /var/www/$key_tmp
+rm -rf /var/www/pasta1
 rm -rf /home/keyssh/$client
 exit" > /home/keyssh/$client
 else
 echo "#!/bin/bash
+#NAME: $client
+#KEY: $pasta1$signus$pasta2
+#VALIDADE: $_temp
 sleep $_temp
-rm -rf /var/www/html/$key_tmp
+rm -rf /var/www/html/$pasta1
 rm -rf /home/keyssh/$client
 exit" > /home/keyssh/$client
 fi
@@ -100,10 +147,8 @@ bash /home/keyssh/$client &
 }
 
 fun_gerkey_fixa () {
-apt-get install apache2 -y  > /dev/null 2>&1
-sed -i "s/Listen 81/Listen 80/g" /etc/apache2/ports.conf
-service apache2 restart
-echo -ne "\033[1;36m Infome o nome do Cliente:\033[1;37m "; read client
+echo ""
+echo -ne "\033[1;36mInfome o nome do Cliente:\033[1;37m "; read client
 if [[ -z $client ]]; then
    echo -e "\033[1;31m Nome invalido ou vazio\033[0m"
    sleep 2
@@ -111,64 +156,165 @@ if [[ -z $client ]]; then
 fi
 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-mkdir /var/www/$key_tmp/
+mkdir /var/www/$pasta1
+mkdir /var/www/$pasta1/$pasta2
 touch /home/keyssh/$client
-cp /home/list /var/www/$key_tmp/
-cp /home/versao /var/www/$key_tmp/
-# cp /home/painel15.tar /var/www/$key_tmp/
-touch /var/www/$key_tmp/index.html > /dev/null 2>&1
+cp /home/list /var/www/$pasta1/$pasta2/list
+## cp -a /home/_script_$/. /var/www/$pasta1
+## chmod 777 /var/www/$pasta1/crz/*
 else
-mkdir /var/www/html/$key_tmp/
+[[ ! -e /var/www/html/index.php ]] && touch /var/www/html/index.php > /dev/null 2>&1
+mkdir /var/www/html/$pasta1
+mkdir /var/www/html/$pasta1/$pasta2
 touch /home/keyssh/$client
-cp /home/list /var/www/html/$key_tmp/
-cp /home/versao /var/www/html/$key_tmp/
-# cp /home/painel15.tar /var/www/html/$key_tmp/
-touch /var/www/html/$key_tmp/index.html > /dev/null 2>&1
+cp /home/list /var/www/html/$pasta1/$pasta2/list
+## cp -a /home/_script_$/. /var/www/html/$pasta1
+## chmod 777 /var/www/html/$pasta1/crz/*
 fi
 clear
-echo -e "\033[0;34m ========================="
-echo -e "\033[1;33m SCRIPT SSHPLUS MANAGER !    \033[0m"
-echo -e "\033[0;34m ========================="
-echo -e ""
-echo -e "\033[1;36m apt-get update -y; apt-get upgrade -y; wget $IP/Plus; chmod 777 Plus; ./Plus"
-echo -e ""
-echo -e "\033[1;32m KEY:\033[1;37m $key_tmp\033[0m"
-echo -e ""
-echo -e "\033[0;34m ========================="
-echo -e "\033[1;33m Obrigado Pela Sua Contribuicao! 👍By @crazy_vpn ✌️😎 \033[0m"
+echo -e "\033[0;34m============================"
+echo -e "\033[1;33m⇱ SCRIPT SSHPLUS MANAGER ⇲    \033[0m"
+echo -e "\033[0;34m============================"
 echo ""
-echo -e "\033[1;32m Usuario: \033[1;37m $client\033[0m"
-echo -e "\033[1;32m Validade da key:\033[1;37m Permanente\033[0m"
+echo -e "\033[1;37mwget $IP/scripts/Plus; chmod 777 Plus; ./Plus"
 echo ""
-echo -e "\033[1;37m$(cat /home/versao) \033[0m"
+echo -e "\033[1;32mKEY: \033[1;37m$pasta1$signus$pasta2\033[0m"
 echo ""
+#echo -e "\033[0;34m============================"
+#echo -e "\033[1;33m? TUTORIAL DE INSTALAÇÃO !    \033[0m"
+echo -e "\033[0;34m============================"
+echo -e "\033[1;33mObrigado Pela Sua Contribuicao! 👍
+DEV: CRAZY ✌️😎 \033[0m"
+echo ""
+echo -e "\033[1;32mUsuario: \033[1;37m $client\033[0m"
+echo -e "\033[1;32mValidade: \033[1;37mPermanente\033[0m"
+echo -e "\033[1;32mVersao: \033[1;37m  $(cat /var/www/html/_script_$/versao)\033[0m"
 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 echo "#!/bin/bash
-rm -rf /var/www/$key_tmp
+#NAME: $client
+#KEY: $pasta1$signus$pasta2
+#VALIDADE: $_temp
+rm -rf /var/www/$pasta1
 rm -rf /home/keyssh/$client
 exit" > /home/keyssh/$client
 else
 echo "#!/bin/bash
-rm -rf /var/www/html/$key_tmp
+#NAME: $client
+#KEY: $pasta1$signus$pasta2
+#VALIDADE: $_temp
+rm -rf /var/www/html/$pasta1
 rm -rf /home/keyssh/$client
 exit" > /home/keyssh/$client
 fi
 # bash /home/keyssh/$client &
 }
 
+fun_gerkey_manual () {
+echo ""
+echo -ne "\033[1;36mInfome o nome do Cliente:\033[1;37m "; read client
+if [[ -z $client ]]; then
+   echo -e "\033[1;31m Nome invalido ou vazio\033[0m"
+   sleep 2
+   exit 0
+fi
+echo ""
+echo -ne "\033[1;36mQuantos minutos essa key deve durar\033[1;33m
+(\033[1;31mEX: \033[1;32m20m m=Minutos, h=Horas, d=Dias\033[1;33m)\033[1;37m: "; read _temp
+if [[ -z $_temp ]]; then
+   echo -e "\033[1;31m Tempo invalido ou vazio\033[0m"
+   sleep 2
+   exit 0
+fi
+echo ""
+echo -ne "\033[1;36mDigite a Key [ xxxxxxxx:xxxxxxxx ]\033[1;33m
+(\033[1;31mEX: \033[1;32m1234:1234\033[1;33m)\033[1;37m: "; read key
+_lnk1=$(echo "$key"|awk -F : '{print $1}')
+_lnk2=$(echo "$key"|awk -F : '{print $2}')
+echo "$_lnk1" > /tmp/c
+echo "$_lnk2" > /tmp/d
+key1p=$(cat /tmp/c)
+key2p=$(cat /tmp/d)
+signus=":"
+if [ "$key" = "" ]; then
+   echo -e "\033[1;31m key nao alterada\033[0m"
+   sleep 2
+   exit 0
+fi
+VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+[[ ! -e /var/www/index.html ]] && touch /var/www/index.html > /dev/null 2>&1
+[[ ! -d /var/www/$key1p ]] && mkdir /var/www/$key1p
+[[ ! -d /var/www/$key1p/$key2p ]] && mkdir /var/www/$key1p/$key2p
+touch /home/keyssh/$client
+cp /home/list /var/www/$key1p/$key2p/list
+## cp -a /home/_script_$/. /var/www/$key1p
+## chmod 777 /var/www/$key1p/crz/*
+else
+[[ ! -e /var/www/html/index.php ]] && touch /var/www/html/index.php > /dev/null 2>&1
+[[ ! -d /var/www/html/$key1p ]] && mkdir /var/www/html/$key1p
+[[ ! -d /var/www/html/$key1p/$key2p ]] && mkdir /var/www/html/$key1p/$key2p
+touch /home/keyssh/$client
+cp /home/list /var/www/html/$key1p/$key2p/list
+## cp -a /home/_script_$/. /var/www/html/$key1p
+## chmod 777 /var/www/html/$key1p/crz/*
+fi
+clear
+echo -e "\033[0;34m============================"
+echo -e "\033[1;33m⇱ SCRIPT SSHPLUS MANAGER ⇲    \033[0m"
+echo -e "\033[0;34m============================"
+echo ""
+echo -e "\033[1;37mwget $IP/scripts/Plus; chmod 777 Plus; ./Plus"
+echo ""
+echo -e "\033[1;32mKEY: \033[1;37m$key1p$signus$key2p\033[0m"
+echo ""
+#echo -e "\033[0;34m============================"
+#echo -e "\033[1;33m? TUTORIAL DE INSTALAÇÃO !    \033[0m"
+echo -e "\033[0;34m============================"
+echo -e "\033[1;33mObrigado Pela Sua Contribuicao! 👍
+DEV: CRAZY ✌️😎 \033[0m"
+echo ""
+echo -e "\033[1;32mUsuario: \033[1;37m $client\033[0m"
+echo -e "\033[1;32mValidade: \033[1;37m$_temp\033[0m"
+echo -e "\033[1;32mVersao: \033[1;37m  $(cat /var/www/html/_script_$/versao)\033[0m"
+VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+echo "#!/bin/bash
+#NAME: $client
+#KEY: $key1p$signus$key2p
+#VALIDADE: $_temp
+sleep $_temp
+rm -rf /var/www/$key1p
+rm -rf /home/keyssh/$client
+exit" > /home/keyssh/$client
+else
+echo "#!/bin/bash
+#NAME: $client
+#KEY: $key1p$signus$key2p
+#VALIDADE: $_temp
+sleep $_temp
+rm -rf /var/www/html/$key1p
+rm -rf /home/keyssh/$client
+exit" > /home/keyssh/$client
+fi
+bash /home/keyssh/$client &
+}
+
 fun_keyson () {
-tput setaf 7 ; tput setab 4 ; tput bold ; printf '%22s%s%-12s\n' "KEYS ONLINE" ; tput sgr0
+echo -e "$barra"
+echo -e " \033[1;31m++| \033[1;32mKEYS ONLINE \033[1;31m|++ \033[0m"
+echo -e "$barra"
 echo ""
 [ "$(ls -A /home/keyssh)" ] && echo -e "\033[1;32m Key Online!\033[1;37m" || echo -e "\033[1;31m Nenhuma Key Online!\033[0m"
 echo ""
 ls /home/keyssh
-echo ""
 }
 
 fun_delkey () {
-tput setaf 7 ; tput setab 1 ; tput bold ; printf '%22s%s%-5s\n' "REMOVER KEY ONLINE" ; tput sgr0
-echo  -e "\033[1;33m"
+echo -e "$barra"
+echo -e " \033[1;31m++| \033[1;32mREMOVER KEY ONLINE \033[1;31m|++ \033[0m"
+echo -e "$barra"
+echo -e "\033[1;33m"
 for keyson in $(ls /home/keyssh |sort |sed 's/.sh//g')
 do
 echo " $keyson"
@@ -187,78 +333,105 @@ if [ -e /home/keyssh/$client ]; then
 fi
 }
 
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\E[41;1;37m           ❖ KEY SSHPLUS MANAGER ❖          \E[0m"
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-mine_port
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-menu2
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+#LISTA PORTAS
+mportas () {
+unset portas
+portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
+while read port; do
+var1=$(echo $port | awk '{print $1}') && var2=$(echo $port | awk '{print $9}' | awk -F ":" '{print $2}')
+[[ "$(echo -e $portas|grep "$var1 $var2")" ]] || portas+="$var1 $var2\n"
+done <<< "$portas_var"
+i=1
+echo -e "$portas"
+}
+
+_ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
+_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
+_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
+_core=$(printf '%-1s' "$(grep -c cpu[0-9] /proc/stat)")
+echo -e "$barra"
 sts=$([ "$(ls -A /home/keyssh)" ] && echo -e "\033[1;32m Key Online!\033[1;37m" || echo -e "\033[1;31m Nenhuma Key Online!\033[0m")
-echo -e "\033[1;37m STATUS: $sts"
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\033[1;37m 1 \033[1;31m• \033[1;36mGERAR NOVA KEY ALEATORIA\033[0m"
-echo -e "\033[1;37m 2 \033[1;31m• \033[1;36mCRIAR KEY FIXA SEM VALIDADE\033[1;33m !\033[0m"
-echo -e "\033[1;37m 3 \033[1;31m• \033[1;36mVER KEYS ONLINES\033[0m"
-echo -e "\033[1;37m 4 \033[1;31m• \033[1;36mREMOVER KEY\033[0m"
-echo -e "\033[1;37m 5 \033[1;31m• \033[1;36mVER LOG DE REGISTROS\033[0m"
-echo -e "\033[1;37m 6 \033[1;31m• \033[1;36mACTUALIZAR VERSAO\033[0m"
-echo -e "\033[1;37m 7 \033[1;31m• \033[1;36mOTIMIZAR SERVIDOR\033[0m"
-echo -e "\033[1;37m 0 \033[1;31m• \033[1;36mSAIR\033[0m"
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -ne "\033[1;32m Escolha uma opcao:\033[1;37m "; read x
-clear
+echo -e "\033[1;37mSTATUS: $sts"
+echo -e "$barra"
+mine_port
+echo -e "$barra"
+echo -e " \033[1;31m++| \033[1;32mKEYGEN SSHPLUS \033[1;31m|++            \033[1;33m[ VERSAO: 1.0 ]\033[0m"
+echo -e "$barra"
+echo -e "\033[1;37m |1| \033[1;31m<----> \033[1;36mGERAR KEY ALEATORIA \033[1;32m[CV] \033[0m"
+echo -e "\033[1;37m |2| \033[1;31m<----> \033[1;36mGERAR KEY ALEATORIA FIXA \033[1;32m[SV] \033[0m"
+echo -e "\033[1;37m |3| \033[1;31m<----> \033[1;36mGERAR KEY MANUAL\033[1;33m ! \033[1;32m[CV] \033[0m"
+if [[ $(mportas|grep apache2|head -1) ]]; then
+echo -e "\033[1;37m |4| \033[1;31m<----> \033[1;32m(RODANDO)\033[1;36m - PARAR KEYGEN"
+else
+echo -e "\033[1;37m |4| \033[1;31m<----> \033[1;31m(PARADO)\033[1;36m - INICIAR KEYGEN"
+fi
+echo -e "\033[1;37m |5| \033[1;31m<----> \033[1;36mKEYS ONLINE\033[0m"
+echo -e "\033[1;37m |6| \033[1;31m<----> \033[1;36mREMOVER KEY\033[0m"
+#echo -e "\033[1;37m |X| \033[1;31m<----> \033[1;36mLOG DE REGISTROS\033[0m"
+echo -e "\033[1;37m |7| \033[1;31m<----> \033[1;36mACTUALIZAR KEYGEN\033[0m"
+echo -e "\033[1;37m |8| \033[1;31m<----> \033[1;36mOTIMIZAR SERVIDOR    \033[1;31mRam:   \033[1;37m $_usor\033[0m"
+echo -e "\033[1;37m |0| \033[1;31m<----> \033[1;36mSAIR DO KEYGEN       \033[1;31mNucleo:\033[1;37m $_usop \033[0m"
+echo -e "$barra"
+echo -ne "\033[0;37m[0-8]: "; read x
+
 case $x in
 1)
-clear
 fun_gerkey
-echo -ne "\n\033[1;33m Enter para retornar\033[0m"; read
+echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
 ;;
 2)
-clear
 fun_gerkey_fixa
-echo -ne "\n\033[1;33m Enter para retornar\033[0m"; read
-sleep 1
+echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
 ;;
 3)
-clear
-fun_keyson
-echo -ne "\n\033[1;33m Enter para retornar\033[0m"; read
-sleep 1
+fun_gerkey_manual
+echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
 ;;
 4)
-clear
-fun_delkey
-echo -e "\n\033[1;33m Enter para retornar\033[0m"
-sleep 1
+if [[ $(mportas|grep apache2|head -1) ]]; then
+service apache2 stop > /dev/null 2>&1
+echo ""
+echo -e "\033[1;31mParado"
+echo -e "\033[1;31mDesabilitado Porta 80"
+else
+apt-get install apache2 -y > /dev/null 2>&1
+sed -i "s;Listen 81;Listen 80;g" /etc/apache2/ports.conf
+service apache2 start > /dev/null 2>&1
+service apache2 restart > /dev/null 2>&1
+echo ""
+echo -e "\033[1;32mIniciado"
+echo -e "\033[1;32mRodando Apache Porta 81"
+fi
+echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
 ;;
 5)
 clear
-cat /home/sshplus-log 2>/dev/null || echo "NENHUM LOG NO MOMENTO"
-echo -e "\n\033[1;33m Enter para retornar\033[0m"; read
-sleep 1
+fun_keyson
+echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
 ;;
 6)
 clear
-wget $IP/script/versao -O /home/versao
-echo -e "\n\033[1;33m Enter para retornar\033[0m"; read
-sleep 1
+fun_delkey
+echo -e "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"
 ;;
 7)
 clear
+rm $HOME/instala_server* > /dev/null 2>&1; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/Generador/instala_server; chmod 777 instala_server* && ./instala_server*
+exit
+;;
+8)
+clear
 otimizar
-echo -e "\n\033[1;33m Enter para retornar\033[0m"; read
-sleep 1
+echo -e "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
 ;;
 0)
-echo -ne "\033[1;32m Saindo... Enter para SAIR\033[0m"; read
+echo -ne "\n\033[1;31mSaindo... Enter para SAIR\033[0m"; read
 clear
 exit
 clear
 ;;
 *)
-echo -ne "\033[1;31m Opcao invalida...\033[0m"; read
-sleep 1
+echo -ne "\n\033[1;31mOpcao invalida !\033[0m"; read
 ok
 ;;
 esac
