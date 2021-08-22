@@ -85,12 +85,12 @@ rm -rf sshplus-v37.zip > /dev/null 2>&1
 cd
 sleep 3s
 echo -e "\033[1;33mINSTALANDO SISTEMA........... \033[1;32mAGUARDE"
-wget -O /var/www/html/scripts/Plus https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/Generador/Modulos/Plus > /dev/null 2>&1
-wget -O /var/www/html/script/versao https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/Generador/Modulos/versao > /dev/null 2>&1
-wget -O /home/index.html https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/Generador/Modulos/index.html > /dev/null 2>&1
-wget -O /home/list https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/Generador/Modulos/list > /dev/null 2>&1
-wget -O /bin/keyssh https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/Generador/Modulos/keyssh > /dev/null 2>&1
-wget -O /bin/otimizar https://raw.githu.0_Update/Modulos/otimizar > /dev/null 2>&1
+wget -O /var/www/html/scripts/Plus https://raw.githubusercontent.com/RPVIP/sshplus/main/Plus > /dev/null 2>&1
+wget -O /var/www/html/script/versao https://raw.githubusercontent.com/RPVIP/sshplus/main/versao > /dev/null 2>&1
+wget -O /home/index.html https://raw.githubusercontent.com/RPVIP/sshplus/main/index.html > /dev/null 2>&1
+wget -O /home/list https://raw.githubusercontent.com/RPVIP/sshplus/main/list > /dev/null 2>&1
+wget -O /bin/keyssh https://raw.githubusercontent.com/RPVIP/sshplus/main/keyssh > /dev/null 2>&1
+wget -O /bin/otimizar https://raw.githubusercontent.com/RPVIP/sshplus/main/otimizar > /dev/null 2>&1
 echo -e "\033[1;33mPERMISOS ARQUIVOS............ \033[1;32mAGUARDE"
     chmod +x  /var/www/html/Plus > /dev/null 2>&1
     chmod +x  /home/list > /dev/null 2>&1
