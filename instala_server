@@ -42,7 +42,7 @@ fun_attlist () {
 instala_fun () {
 clear
 echo -e "$barra"
-echo -e "      \033[1;33mINSTALADOR KEY SSHPLUS MANAGER !\033[0m"
+echo -e "      \033[1;33mINSTALADOR KEY MEGASSH MANAGER !\033[0m"
 echo -e "$barra"
 echo ""
 read -n1 -r -p " Enter to Continue..."
