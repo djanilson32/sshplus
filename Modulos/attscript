@@ -72,7 +72,7 @@ fun_atts () {
 
 echo -e "                              \033[1;31mBy rp4321\033[1;36m"
 
-echo -e "   SSHPlus" | figlet
+echo -e "   MEGASSH" | figlet
 
 echo " "
 
