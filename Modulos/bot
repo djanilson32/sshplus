@@ -1348,7 +1348,7 @@ fun_del_rev() {
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "🗑 REMOVER REVENDEDOR 🗑\n\nInforme o user dele [Ex: @crazy_vpn]:" \
+            --text "🗑 REMOVER REVENDEDOR 🗑\n\nInforme o user dele [Ex: @rp4321]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
@@ -1466,7 +1466,7 @@ fun_lim_rev() {
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "♾ ALTERAR LIMITE REVENDA ♾\n\nInforme o user dele [Ex: @crazy_vpn]:" \
+            --text "♾ ALTERAR LIMITE REVENDA ♾\n\nInforme o user dele [Ex: @rp4321]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
@@ -1512,7 +1512,7 @@ fun_dat_rev() {
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "📆 ALTERAR DATA REVENDA 📆\n\nInforme o user dele [Ex: @crazy_vpn]:" \
+            --text "📆 ALTERAR DATA REVENDA 📆\n\nInforme o user dele [Ex: @rp4321]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
@@ -1624,7 +1624,7 @@ fun_susp_rev() {
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "🔒 SUSPENDER REVENDEDOR 🔒\n\nInforme o user dele [Ex: @crazy_vpn]:" \
+            --text "🔒 SUSPENDER REVENDEDOR 🔒\n\nInforme o user dele [Ex: @rp4321]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
@@ -2283,7 +2283,7 @@ while :; do
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
                     [[ -z $_VAR1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Erro \n\n⚠️ Informe o user [EX: @crazy_vpn]")" \
+                            --text "$(echo -e "❌ Erro \n\n⚠️ Informe o user [EX: @rp4321]")" \
                             --parse_mode html
                         break
                     }
@@ -2425,7 +2425,7 @@ while :; do
                         --parse_mode html
                     # ALTERAR DATA
                     ;;
-                '📆 ALTERAR DATA REVENDA 📆\n\nInforme o user dele [Ex: @crazy_vpn]:')
+                '📆 ALTERAR DATA REVENDA 📆\n\nInforme o user dele [Ex: @rp4321]:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
