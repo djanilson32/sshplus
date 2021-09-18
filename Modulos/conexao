@@ -2033,10 +2033,11 @@ exit 0' >$RCLOCAL
 				sts8="\033[1;31m○ "
 			}
 			[[ "$(ps x | grep 'slow_dns' | grep -v 'grep'|wc -l)" != '0' ]] && {
-				sts9="\033[1;32m◉ "
+			    echo -e "\033[1;32mSERVICO: \033[1;33mSLOWDNS \033[1;32mPORTA: \033[1;37m$(sed -n 1p /etc/SSHPlus/dns/autodns | awk '{print $6}' | cut -d':' -f2)"
+				sts8="\033[1;32m◉ "
 			} || {
-				sts9="\033[1;31m○ "
-			}            
+				sts8="\033[1;31m○ "
+			}
 			[[ "$(netstat -tlpn | grep 'sslh' | wc -l)" != '0' ]] && {
 				echo -e "\033[1;32mSERVICO: \033[1;33mSSLH: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'sslh' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts7="\033[1;32m◉ "
@@ -2134,7 +2135,7 @@ exit 0' >$RCLOCAL
 				fun_chisel
                 ;;              
 		    9 | 09)
-				slow_dns
+				fun_slow_dns
 				;;
 		    10 | 10)
 				fun_v2rayins
