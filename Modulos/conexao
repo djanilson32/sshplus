@@ -2135,7 +2135,7 @@ exit 0' >$RCLOCAL
 				fun_chisel
                 ;;              
 		    9 | 09)
-				fun_slow_dns
+				slow_dns
 				;;
 		    10 | 10)
 				fun_v2rayins
