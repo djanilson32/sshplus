@@ -233,21 +233,24 @@ case "$x" in
    botssh
    ;;
    26)
+   botteste
+   ;;
+   27)
    clear
    senharoot
    sleep 3
    ;;
-   27)
+   28)
    autoexec
    ;;
-   28)
+   29)
    attscript
    ;;
-   29)
+   30)
    clear
    delscript
    ;;
-   30)
+   31)
    menu
    ;;
    0|00)
