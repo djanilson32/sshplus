@@ -234,7 +234,7 @@ case "$x" in
    botssh
    ;;
    26)
-   fun_bot1
+   botteste
    ;;
    27)
    clear
