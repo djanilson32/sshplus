@@ -1,5 +1,4 @@
 #!/bin/bash
-#@RP4321
 fun_bar () {
 comando[0]="$1"
 comando[1]="$2"
