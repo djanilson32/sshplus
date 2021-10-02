@@ -2277,7 +2277,7 @@ while :; do
                         --text 'Informe o user dele [Ex: @RP4321]:' \
                         --reply_markup "$(ShellBot.ForceReply)"
                     ;;
-                'Informe o user dele [Ex: @crazy_vpn]:')
+                'Informe o user dele [Ex: @RP4321]:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
