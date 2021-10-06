@@ -12,7 +12,10 @@ except:
 PASS = ''
 BUFLEN = 8196 * 8
 TIMEOUT = 60
+MSG = 'MEGASSH'
 DEFAULT_HOST = '0.0.0.0:1194'
+RESPONSE = "HTTP/1.1 200 " + str(MSG) + "\r\n\r\n"
+DEFAULT_HOST = '0.0.0.0:22'
 RESPONSE = "HTTP/1.0 101 " \r\n\r\n"
  
 class Server(threading.Thread):
