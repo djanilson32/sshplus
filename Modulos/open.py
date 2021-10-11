@@ -13,8 +13,8 @@ except:
 PASS = ''
 BUFLEN = 8196 * 8
 TIMEOUT = 60
-DEFAULT_HOST = '127.0.0.1:1194'
-RESPONSE = "HTTP/1.1 101 \r\n\r\n"
+DEFAULT_HOST = "127.0.0.1:1194"
+RESPONSE = 'HTTP/1.1 101 PREMIUM \r\n\r\n'
 
 class Server(threading.Thread):
     def __init__(self, host, port):
