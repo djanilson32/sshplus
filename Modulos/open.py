@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 # SSHPLUS By @Crazy_vpn
-import socket, threading, thread, select, signal, sys, time, getopt
-
-PASS = ''
-LISTENING_ADDR = '0.0.0.0'
+import socket, threading, thread, select, signal, sys, time
+from os import system
+system("clear")
+#conexao
+IP = '0.0.0.0'
 try:
-   LISTENING_PORT = int(sys.argv[1])
+   PORT = int(sys.argv[1])
 except:
-   LISTENING_PORT = 8080
-BUFLEN = 4096 * 4
+   PORT = 8080
+PASS = ''
+BUFLEN = 8196 * 8
 TIMEOUT = 60
-DEFAULT_HOST = '127.0.0.1:1194'
-RESPONSE = "HTTP/1.1 101 PREMIUM \r\n\r\n"
+MSG = 'SSHPLUS'
+DEFAULT_HOST = '0.0.0.0:1194'
+RESPONSE = "HTTP/1.1 200 " + str(MSG) + "\r\n\r\n"
 
 class Server(threading.Thread):
     def __init__(self, host, port):
