@@ -1425,34 +1425,28 @@ exit 0' >$RCLOCAL
 			fi
 			[[ $(grep -wc 'open.py' /etc/autostart) != '0' ]] && pt_proxy=$(grep -w 'open.py' /etc/autostart| cut -d' ' -f6) || pt_proxy=80
 			cat <<-EOF >/etc/openvpn/client-common.txt
-				# OVPN_ACCESS_SERVER_PROFILE=[MEGASSH]
+				# OVPN_ACCESS_SERVER_PROFILE=[SSHPLUS]
 				client
 				dev tun
-                                proto $PROTOCOL
-                                sndbuf 0
-                                rcvbuf 0
-                                setenv opt method GET
-                                remote $IP $pt_proxy
-                                http-proxy-option VERSION 1.1 
-                                http-proxy $IP $pt_proxy
-                                connect-retry 5 5
-                                connect-retry-max 8080
-                                mute-replay-warnings
-                                redirect-gateway def1
-                                script-security 2
-                                resolv-retry 5
-                                nobind
-                                persist-key
-                                persist-tun
-                                remote-cert-tls server
-                                cipher AES-256-CBC
-                                comp-lzo yes
-                                setenv opt block-outside-dns
-                                key-direction 1
-                                verb 3
-                                auth-user-pass
-                                keepalive 10 120
-                                float
+				proto $PROTOCOL
+				sndbuf 0
+				rcvbuf 0
+				remote /SSHPLUS? $porta
+				#payload "HTTP/1.1 [lf]CONNECT HTTP/1.1[lf][lf]|[lf]."
+				http-proxy $IP $pt_proxy
+				resolv-retry 5
+				nobind
+				persist-key
+				persist-tun
+				remote-cert-tls server
+				cipher AES-256-CBC
+				comp-lzo yes
+				setenv opt block-outside-dns
+				key-direction 1
+				verb 3
+				auth-user-pass
+				keepalive 10 120
+				float
 			EOF
 			# gerar client.ovpn
 			newclient "SSHPLUS"
