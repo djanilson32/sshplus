@@ -1428,10 +1428,10 @@ exit 0' >$RCLOCAL
 				# OVPN_ACCESS_SERVER_PROFILE=[MEGASSH]
 				client
 				dev tun
-                                proto tcp
-                                sndbuf 0
-                                rcvbuf 0
-                                setenv opt method GET
+                               proto tcp
+                               sndbuf 0
+                               rcvbuf 0
+                               setenv opt method GET
                                 remote SEU-DOMINIO-AQUI  8080
                                 http-proxy-option VERSION 1.1 
                                 http-proxy SEU-DOMINIO-AQUI 8080
