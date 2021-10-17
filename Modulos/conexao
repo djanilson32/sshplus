@@ -1349,7 +1349,7 @@ group $GROUPNAME
 persist-key
 persist-tun
 status openvpn-status.log
-management localhost 7505
+management localhost 
 verb 3
 crl-verify crl.pem
 client-to-client
@@ -1448,7 +1448,7 @@ exit 0' >$RCLOCAL
 				float
 			EOF
 			# gerar client.ovpn
-			newclient "MEGASSH"
+			newclient "SSHPLUS"
 			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m" || echo -e "\n\033[1;31mERRO ! A INSTALACAO CORROMPEU\033[0m"
 		}
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
