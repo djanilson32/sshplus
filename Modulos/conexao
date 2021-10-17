@@ -1428,24 +1428,31 @@ exit 0' >$RCLOCAL
 				# OVPN_ACCESS_SERVER_PROFILE=[MEGASSH]
 				client
 				dev tun
-				proto $PROTOCOL
-				sndbuf 0
-				rcvbuf 0
-				remote /MEGASSH? $porta
-				http-proxy $IP $pt_proxy
-				resolv-retry 5
-				nobind
-				persist-key
-				persist-tun
-				remote-cert-tls server
-				cipher AES-256-CBC
-				comp-lzo yes
-				setenv opt block-outside-dns
-				key-direction 1
-				verb 3
-				auth-user-pass
-				keepalive 10 120
-				float
+                                proto tcp
+                                sndbuf 0
+                                rcvbuf 0
+                                setenv opt method GET
+                                remote SEU-DOMINIO-AQUI  8080
+                                http-proxy-option VERSION 1.1 
+                                http-proxy SEU-DOMINIO-AQUI 8080
+                                connect-retry 5 5
+                                connect-retry-max 8080
+                                mute-replay-warnings
+                                redirect-gateway def1
+                                script-security 2
+                                resolv-retry 5
+                                nobind
+                                persist-key
+                                persist-tun
+                                remote-cert-tls server
+                                cipher AES-256-CBC
+                                comp-lzo yes
+                                setenv opt block-outside-dns
+                                key-direction 1
+                                verb 3
+                                auth-user-pass
+                                keepalive 10 120
+                                float
 			EOF
 			# gerar client.ovpn
 			newclient "SSHPLUS"
