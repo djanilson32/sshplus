@@ -155,7 +155,7 @@ SCOLOR='\033[0m'
 				acl url1 dstdomain -i 127.0.0.1
 				acl url2 dstdomain -i localhost
 				acl url3 dstdomain -i $ipdovps
-				acl url4 dstdomain -i /SSHPLUS?
+				acl url4 dstdomain -i /MEGASSH?
 				acl payload url_regex -i "$var_pay"
 				acl all src 0.0.0.0/0
 				http_access allow url1
@@ -1287,7 +1287,7 @@ SCOLOR='\033[0m'
 				./easyrsa --batch build-ca nopass
 				./easyrsa gen-dh
 				./easyrsa build-server-full server nopass
-				./easyrsa build-client-full SSHPLUS nopass
+				./easyrsa build-client-full MEGASSH nopass
 				./easyrsa gen-crl
 				cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn
 				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
@@ -1445,7 +1445,7 @@ exit 0' >$RCLOCAL
 				float
 			EOF
 			# gerar client.ovpn
-			newclient "SSHPLUS"
+			newclient "MEGASSH"
 			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m" || echo -e "\n\033[1;31mERRO ! A INSTALACAO CORROMPEU\033[0m"
 		}
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
