@@ -11,7 +11,3 @@
     screen -r -S "bot_teste" -X quit
     clear && echo "BOT DESATIVADO"
 }
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
