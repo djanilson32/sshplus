@@ -305,9 +305,6 @@ case "$x" in
    33)
    menu
    ;;
-   multi
-   ;;
-   34)
    0|00)
    echo -e "\033[1;31mSaindo...\033[0m"
    sleep 2
