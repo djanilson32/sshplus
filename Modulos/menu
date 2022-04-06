@@ -467,7 +467,7 @@ case "$x" in
    18)
    limit_ssh
    ;;
-   17)
+   19)
    clear
    badvpn
    exit;
