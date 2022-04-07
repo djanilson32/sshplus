@@ -234,7 +234,7 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 
 echo -e "\033[1;36mBADVPN PRO \033[1;37m $stsu \033[1;37m    | \033[1;36mBOT TELEGRAM $stsbot \033[1;37m  | \033[1;37m\033[1;36mLIMITER \033[1;37m $stsl"
 [[ ! -e /tmp/att ]]  && {
-
+echo ""
     echo -e "\033[1;32mOnlines:\033[1;37m $_onlin     \033[1;31mExpirados: \033[1;37m$_userexp \033[1;33mTotal: \033[1;37m$_tuser\033[0m"
     var01='\033[1;37m•'
 } || {
