@@ -25,6 +25,7 @@ dpkg-reconfigure --frontend noninteractive tzdata >/dev/null 2>&1
 [[ ! -d /etc/bot/arquivos ]] && mkdir /etc/bot/arquivos
 [[ ! -d /etc/bot/revenda ]] && mkdir /etc/bot/revenda
 [[ ! -d /etc/bot/suspensos ]] && mkdir /etc/bot/suspensos
+[[ ! -d /etc/rec ]] && mkdir /etc/rec
 [[ ! -e /etc/bot/lista_ativos ]] && touch /etc/bot/lista_ativos
 [[ ! -e /etc/bot/lista_suspensos ]] && touch /etc/bot/lista_suspensos
 echo -e 'by: @KIRITO_SSH' >/usr/lib/sshplus && cat /usr/lib/sshplus >$lst2/licence && cat /usr/lib/sshplus > /etc/SSHPlus/.tmp/crazy
