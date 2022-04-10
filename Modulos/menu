@@ -368,8 +368,8 @@ echo -e "\033[1;31mHora: \033[1;37m$_hora     \033[1;31mEm uso: \033[1;37m$_usor
 
 [[ ! -e /tmp/att ]]  && {
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\033[1;36mBADVPN PRO \033[1;37m $stsu \033[1;37m    | \033[1;36mBOT TELEGRAM $stsbot \033[1;37m  | \033[1;37m\033[1;36mLIMITER \033[1;37m $stsl
-\033[1;36mAUTO EXECUÇÃO \033[1;37m $autm \033[1;37m | \033[1;36mBLOCK TORRENT $stsf \033[1;37m |"
+echo -e "\033[1;36mBADVPN PRO \033[1;37m $stsu \033[1;37m    | \033[1;36mBOT TELEGRAM $stsbot \033[1;37m  | \033[1;36mBLOCK TORRENT $stsf \033[1;37m |
+\033[1;36mAUTO EXECUÇÃO \033[1;37m $autm \033[1;37m |"
 echo ""
 echo -e "\033[1;32mOnlines:\033[1;37m $_onlin     \033[1;31mExpirados: \033[1;37m$_userexp \033[1;33mTotal: \033[1;37m$_tuser\033[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
