@@ -450,7 +450,7 @@ case "$x" in
    blockuser
    ;;
    12)
-   initcheck
+   socks5.py
    ;;
    13)
    clear
