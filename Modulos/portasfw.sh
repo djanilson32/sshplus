@@ -5,6 +5,14 @@ echo " "
 echo -e "\033[1;33mEssas script ira liberar as portas 80 8080 1194 81 443 442 servidor
 \033[0m"
 echo""
+echo ""
+	echo "Este script irá alterar algumas configurações de rede"
+	echo "e ira abria as portas para oracle."
+	echo ""
+	read -p "Continuar com a instalação? [s/n]: " -e -i n resposta
+	if [[ "$resposta" = 's' ]]; then
+	echo ""
+  
 sudo apt install firewalld &&
 sudo firewall-cmd --zone=public --permanent --add-port=80/tcp &&
 sudo firewall-cmd --zone=public --permanent --add-port=8080/tcp &&
