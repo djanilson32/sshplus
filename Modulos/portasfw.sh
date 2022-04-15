@@ -22,3 +22,14 @@ sudo firewall-cmd --zone=public --permanent --add-port=81/tcp &&
 sudo firewall-cmd --zone=public --permanent --add-port=442/tcp &&
 sudo firewall-cmd --reload &&
 sudo firewall-cmd --zone=public --list-ports
+
+echo ""
+		echo "As configurações de portas foram adicionadas com sucesso."
+		echo ""
+	else
+		echo ""
+		echo "A instalação foi cancelada pelo usuário!"
+		echo ""
+	fi
+fi
+exit
