@@ -499,6 +499,9 @@ case "$x" in
    23)
    menu2
    ;;
+   24)
+   portasfw.sh
+   ;;
    0 | 00)
    echo -e "\033[1;31mSaindo...\033[0m"
    sleep 2
