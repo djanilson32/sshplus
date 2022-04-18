@@ -1,13 +1,15 @@
 #!/bin/bash
 clear
-echo -e "\033[1;31mATENCAO!!\033[0m"
-echo " "
-echo -e "\033[1;33mEssas script ira liberar as portas 80 8080 8799 1194 81 443 442 servidor
-\033[0m"
-echo""
+
+clear
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\E[44;1;37m               ○ ABRIR PORTAS FIRAWELL ○            \E[0m"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "E[44;1;37mEssas script ira liberar as portas 80 8080 8799 1194 81 443 442 servidor\E[0m"                
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
-	echo "Este script irá alterar algumas configurações de rede"
-	echo "e ira abria as portas para oracle."
+
+
 	echo ""
 	read -p "Continuar com a instalação? [s/n]: " -e -i n resposta
 	if [[ "$resposta" = 's' ]]; then
