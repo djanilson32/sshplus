@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 echo -e "\033[1;31mATENCAO!!\033[0m"
 echo " "
 echo -e "\033[1;33mEssas script ira liberar as portas 80 8080 8799 1194 81 443 442 servidor
