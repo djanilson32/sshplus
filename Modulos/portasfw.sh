@@ -4,8 +4,10 @@ clear
 clear
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "\E[44;1;37m               ○ ABRIR PORTAS FIRAWELL ○            \E[0m"
+echo ""
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "E[44;1;37mEssas script ira liberar as portas 80 8080 8799 1194 81 443 442 servidor\E[0m"                
+echo -e "E[44;1;37m Essas script ira liberar as portas:
+80 8080 8799 1194 81 443 442 servidor \E[0m"                
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
 
